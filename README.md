@@ -23,3 +23,21 @@ func main() {
 	}
 }
 ```
+
+## JSON
+Due to golang way to handle interface, you can't use json.Marshal directly.
+There is no problem to implement MarshalJSON, but you can't unmarshal it back.
+This would require to implement UnmarshalJSON, on an interface, which is not possible.
+
+```golang
+func (o *Option[T]) UnmarshalJSON(data []byte) error {
+//      ^^^^^^^^^^ this is not possible
+    var v T
+    if err := json.Unmarshal(data, &v); err != nil {
+        *o = None[T]()
+        return nil
+    }
+    *o = Some[T](v)
+    return nil
+}
+```
