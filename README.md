@@ -3,19 +3,22 @@
 ## Example
 
 ```golang
-func ExampleResultSwitch() {
-	fn := func() Result[string] {
-		return Ok[string]("hello")
-	}
+func foo(in string) Result[string] {
+    if in != "world" {
+        return Failed[string](errors.New("in != world"))
+    }
+    return Ok[string]("hello, world")
+}
 
-	switch v := fn().(type) {
+func main() {
+	switch v := foo("world").(type) {
 	case Failed[string]:
 		fmt.Println(v.Error())
 	case OK[string]:
 		fmt.Println(v.Unwrap())
 	}
 
-	if v := fn(); v.IsOk() {
+	if v := foo("world"); v.IsOk() {
 		fmt.Println(v.Unwrap())
 	}
 }
