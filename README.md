@@ -13,7 +13,7 @@ func ExampleResultSwitch() {
 		fmt.Println(v.Error())
 	case OK[string]:
 		fmt.Println(v.Unwrap())
-    }
+	}
 
 	if v := fn(); v.IsOk() {
 		fmt.Println(v.Unwrap())
