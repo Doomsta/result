@@ -1,7 +1,12 @@
 # result
 
 ## Example
+### Option
+```golang
+// TODO
+```
 
+### Result
 ```golang
 func foo(in string) Result[string] {
     if in != "world" {
@@ -22,6 +27,11 @@ func main() {
 		fmt.Println(v.Unwrap())
 	}
 }
+```
+
+### Nullable
+```golang
+// TODO
 ```
 
 ## JSON
