@@ -45,6 +45,7 @@ func (r Failed[T]) IsOk() bool {
 func (r OK[T]) IsErr() bool {
 	return false
 }
+
 func (r Failed[T]) IsErr() bool {
 	return true
 }
@@ -58,8 +59,9 @@ func (r Failed[T]) Error() error {
 }
 
 func (r Failed[T]) Unwrap() T {
-	panic("can't unwrap err value")
+	panic("unwrap error:" + r.err.Error())
 }
+
 func (r OK[T]) Unwrap() T {
 	return *r.value
 }
